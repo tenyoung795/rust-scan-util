@@ -43,7 +43,9 @@ pub mod scanner;
 pub mod tokenizer;
 pub mod whitespace;
 
-fn len_while(s: &str, pred: |char| -> bool) -> Option<uint> {
+fn len_while<Pred>(s: &str, pred: Pred) -> Option<uint>
+    where Pred: Fn(char) -> bool
+{
 	s.char_indices()
 		.take_while(|&(_,ch)| pred(ch))
 		.last()
